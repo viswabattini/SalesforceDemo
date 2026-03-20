@@ -12,8 +12,9 @@ pipeline {
     }
 
     environment {
-        SF_USERNAME     = credentials('sf-user')       // Salesforce username credential
+        SF_USERNAME     = credentials('sf-username')       // Salesforce username credential
         SF_CONSUMER_KEY = credentials('sf-consumerkey')    // Connected App consumer key
+        SF_CLI = 'C:/Program Files/sf/bin/sf.cmd'
     }
 
     stages {
@@ -29,7 +30,7 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'jwt_key', variable: 'JWT_KEY_FILE')]) {
                     bat """
-                    sf org login jwt ^
+                    '%SF_CLI%' org login jwt ^
                     --client-id %SF_CONSUMER_KEY% ^
                     --jwt-key-file %JWT_KEY_FILE% ^
                     --username %SF_USERNAME% ^
