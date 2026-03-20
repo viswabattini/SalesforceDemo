@@ -7,13 +7,13 @@ pipeline {
 
     parameters {
         string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'Git branch to build from')
-        string(name: 'ORG_ALIAS', defaultValue: 'projectdemosfdc', description: 'Salesforce org alias')
+        string(name: 'ORG_ALIAS', defaultValue: 'SFDEMO', description: 'Salesforce org alias')
         choice(name: 'INSTANCE_URL', choices: ['https://login.salesforce.com', 'https://test.salesforce.com'], description: 'Salesforce login URL')
     }
 
     environment {
-        SF_USERNAME     = credentials('sfdc_user')       // Salesforce username credential
-        SF_CONSUMER_KEY = credentials('consumer_key')    // Connected App consumer key
+        SF_USERNAME     = credentials('sf-user')       // Salesforce username credential
+        SF_CONSUMER_KEY = credentials('sf-consumerkey')    // Connected App consumer key
     }
 
     stages {
@@ -21,7 +21,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git branch: "${params.BRANCH_NAME}",
-                    url: 'https://github.com/Dharsaikat13/SFDC--DemoProject.git'
+                    url: 'https://github.com/viswabattini/SalesforceDemo.git'
             }
         }
 
