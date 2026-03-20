@@ -44,7 +44,7 @@ pipeline {
         stage('Deploy to Org') {
             steps {
                 bat """
-                sf project deploy start ^
+                "%SF_CLI%" project deploy start ^
                 --source-dir force-app ^
                 --target-org ${params.ORG_ALIAS} ^
                 --wait 10
@@ -55,7 +55,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 bat """
-                sf apex run test ^
+                "%SF_CLI%" apex run test ^
                 --target-org ${params.ORG_ALIAS} ^
                 --wait 10 ^
                 --result-format human
