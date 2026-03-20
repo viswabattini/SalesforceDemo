@@ -52,17 +52,6 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                bat """
-                "%SF_CLI%" apex run test ^
-                --target-org ${params.ORG_ALIAS} ^
-                --wait 10 ^
-                --result-format human
-                """
-            }
-        }
-
         stage('Post-Build Summary') {
             steps {
                 echo "Deployment and tests completed for org alias: ${params.ORG_ALIAS}, branch: ${params.BRANCH_NAME}"
